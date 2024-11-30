@@ -1,0 +1,23 @@
+First, we need to go inside the project folder and make sure that the target folder 
+contains the application .jar file.If not then first run maven install from STS or eclipse project to generate 
+the jar file.
+
+sumit@Home MINGW64 /e/Java Techie/JavaTechie-workspace/SpringBoot-Docker
+$ docker build -t spring-boot-docker.jar
+ERROR: "docker buildx build" requires exactly 1 argument.
+
+sumit@Home MINGW64 /e/Java Techie/JavaTechie-workspace/SpringBoot-Docker
+$ docker build -t spring-boot-docker.jar .(provide the root here)
+
+> To run the docker image:
+docker run -p 9090:<application-server-port> spring-boot-docker.jar
+
+> To know the docker container ID:
+ docker container ls
+> To go inside the docker container if suppose we want to debug something:
+winpty docker exec -it 18618f04a3d6 sh
+
+> To run the application manually forom inside the docker container:
+curl http://localhost:<application.properties port number>/message
+e.g.
+curl http://localhost:1151/message
