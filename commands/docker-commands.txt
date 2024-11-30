@@ -8,11 +8,13 @@ ERROR: "docker buildx build" requires exactly 1 argument.
 
 sumit@Home MINGW64 /e/Java Techie/JavaTechie-workspace/SpringBoot-Docker
 $ docker build -t spring-boot-docker.jar .(provide the root here)
-
+$ docker build -t spring-boot-docker:tag1 .
+> To know all the docker image:
+docker images
 > To run the docker image:
 docker run -p 9090:<application-server-port> spring-boot-docker.jar
 
-> To know the docker container ID:
+> To know the docker container ID:this command will only work when the container is running
  docker container ls
 > To go inside the docker container if suppose we want to debug something:
 winpty docker exec -it 18618f04a3d6 sh
@@ -21,3 +23,21 @@ winpty docker exec -it 18618f04a3d6 sh
 curl http://localhost:<application.properties port number>/message
 e.g.
 curl http://localhost:1151/message
+
+> connecting to docker hub: I have logged in via my learning email and then run the below command:
+winpty docker login
+> copy the repository name from the docker hub.
+> To push the image in docker hub is two step process:1)create a docker image with the repository present 
+in docker hub and tag it with the image. 2)push the image.
+
+Tag a image:
+docker tag spring-boot-docker:tag1 sumitbasulabs1162/spring-boot-docker:tag1
+Push an image to docker hub:
+docker push sumitbasulabs1162/spring-boot-docker:tag1
+untag an image:
+docker rmi sumitbasulabs1162/spring-boot-docker:tag1
+pull an image from docker hub:
+docker pull sumitbasulabs1162/spring-boot-docker:tag1
+run the pulled docker image in docker container:
+docker run -p 9090:8088 sumitbasulabs1162/spring-boot-docker:tag1
+
